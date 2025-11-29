@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Design Archives | Mihika Vanage</title>
+    <link rel="icon" type="image/x-icon" href="favicon mv.png" />
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <style>
+      body {
+        background-color: #050505;
+        color: #ffffff;
+        font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+        font-family: "Inter", sans-serif;
+        overflow-x: hidden;
+        scroll-behavior: smooth;
+      }
+
+      .nav-blur {
+        background: rgba(5, 5, 5, 0.8);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+      }
+      .nav-blur a {
+        color: #9ca3af !important;
+      }
+      .nav-blur a:hover {
+        color: #ffffff !important;
+      }
+
+      .text-gradient {
+        background: linear-gradient(90deg, #e8bcf7 0%, #ffffff 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      /* Archive Layout */
+      #archives-container {
+        position: relative;
+        min-height: 120vh;
+        width: 100%;
+        padding: 4rem 2rem;
+        margin: 2rem 0;
+      }
+      @media (max-width: 768px) {
+        #archives-container {
+          min-height: 150vh;
+          padding: 2rem 1rem;
+        }
+      }
+
+      /* Folder Icon */
+      .folder-icon {
+        position: absolute;
+        width: 120px;
+        height: 120px;
+        z-index: 1;
+        opacity: 0.7;
+        pointer-events: none;
+      }
+
+      /* Archive Grid */
+      .archive-grid-item {
+        width: 250px;
+        height: 250px;
+        overflow: hidden;
+        border-radius: 1rem;
+        position: absolute;
+        cursor: pointer;
+        opacity: 0;
+        display: block;
+      }
+      @media (min-width: 768px) {
+        .archive-grid-item {
+          width: 300px;
+          height: 300px;
+        }
+      }
+      .archive-grid-item:hover {
+        z-index: 10;
+      }
+      .archive-grid-item img {
+        /* width: 100%; */
+        /* height: 100%; */
+        /* object-fit: cover; */
+        transition: transform 0.4s ease;
+        display: block;
+        opacity: 1;
+      }
+      .archive-grid-item:hover img {
+        transform: scale(1.15);
+      }
+
+      /* Archive Title Overlay */
+      .archive-title {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: linear-gradient(
+          to top,
+          rgba(0, 0, 0, 0.9) 0%,
+          rgba(0, 0, 0, 0.7) 50%,
+          transparent 100%
+        );
+        color: #ffffff;
+        padding: 1.5rem 1rem 1rem;
+        font-size: 1rem;
+        font-weight: 600;
+        text-align: center;
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.3s ease, transform 0.3s ease;
+        pointer-events: none;
+        z-index: 5;
+      }
+      .archive-grid-item:hover .archive-title {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .reveal-scroll {
+        opacity: 1;
+      }
+
+      .folder-icon,
+      .archive-grid-item {
+        will-change: transform, opacity;
+      }
+    </style>
+  </head>
+  <body class="antialiased selection:bg-purple-500 selection:text-white">
+    <nav class="fixed top-0 left-0 w-full z-[9999] nav-blur">
+      <div
+        class="container mx-auto px-6 py-5 flex justify-between items-center"
+      >
+        <a
+          href="../index.html"
+          class="text-sm font-medium text-gray-400 hover:text-white transition"
+          >Back to Portfolio</a
+        >
+        <div class="hidden md:flex gap-10 text-sm font-medium text-gray-400">
+          <a href="../index.html" class="hover:text-white transition">Work</a>
+          <a href="about.html" class="hover:text-white transition"
+            >About</a
+          >
+          <a href="../index.html#contact" class="hover:text-white transition"
+            >Contact</a
+          >
+        </div>
+      </div>
+    </nav>
+
+    <section class="pt-32 pb-20 bg-black">
+      <div class="container mx-auto px-6">
+        <div class="max-w-xl mx-auto">
+          <div class="text-center mb-16">
+            <h1 class="text-5xl md:text-5xl font-bold mb-6 text-gradient">
+              Design Archives
+            </h1>
+            <p class="text-xl md:text-xl text-gray-400 max-w-xl mx-auto">
+              A repository of sketches, experiments, illustrations, and quick
+              mockups not featured in the main portfolio.
+            </p>
+          </div>
+
+          <div id="archives-container">
+            <!-- Folder Icon at Center -->
+            <img src="folder.webp" alt="Design Folder" class="folder-icon" />
+
+            <!-- Scattered Archive Items -->
+            <div class="archive-grid-item" data-index="0">
+              <img
+                src="Scenary image Des archive.png"
+                alt="Scenery Illustration"
+              />
+              <div class="archive-title">Scenery Illustration</div>
+            </div>
+            <div class="archive-grid-item" data-index="2">
+              <img src="Nykkaa Des archive.png" alt="Nykaa Ad Concept" />
+              <div class="archive-title">Nykaa Ad Concept</div>
+            </div>
+            <div class="archive-grid-item" data-index="4">
+              <img
+                src="Story Book- Design archive.jpg"
+                alt="Story Book Illustration"
+              />
+              <div class="archive-title">Story Book Illustration</div>
+            </div>
+            <div class="archive-grid-item" data-index="6">
+              <img
+                src="Insence stick - Design Archive.jpg"
+                alt="Incense Stick Mockup"
+              />
+              <div class="archive-title">Incense Stick Mockup</div>
+            </div>
+            <div class="archive-grid-item" data-index="8">
+              <img src="Baraque.jpeg" alt="Baroque Typography Experiment" />
+              <div class="archive-title">Baroque Typography</div>
+            </div>
+          </div>
+
+          <p class="text-center text-gray mt-12 text-sm">
+            More content coming soon!
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <footer class="py-12 bg-black text-center border-t border-white/5">
+      <div class="container mx-auto px-6">
+        <a href="../index.html" class="text-gray-400 hover:text-white transition"
+          >^Back to Portfolio</a
+        >
+      </div>
+    </footer>
+
+    <script>
+      // No need for ScrollTrigger here, but safe to leave this if you use it elsewhere
+      // gsap.registerPlugin(ScrollTrigger);
+
+      function initBurstAnimation() {
+        const archiveItems = document.querySelectorAll(".archive-grid-item");
+        const container = document.getElementById("archives-container");
+        const folderIcon = document.querySelector(".folder-icon");
+
+        if (!archiveItems.length || !container || !folderIcon) return;
+
+        // Wait a moment so layout is ready
+        setTimeout(() => {
+          const containerRect = container.getBoundingClientRect();
+          const isMobile = window.innerWidth < 768;
+
+          const centerX = containerRect.width / 2;
+          const centerY = containerRect.height / 2;
+
+          const baseDistance = isMobile ? 250 : 450;
+          const verticalSpread = isMobile ? 180 : 280;
+          const itemHalfSize = isMobile ? 125 : 150; // half width/height of your cards
+          const folderOffset = itemHalfSize + 40;
+
+          const centerImageY = centerY;
+
+          // Final folder position (bottom center, like your original)
+          const folderY = centerImageY + itemHalfSize + folderOffset;
+          const folderFinalLeft = centerX - 60; // folder is 120px wide
+          const folderFinalTop = folderY - 60; // folder is 120px tall
+
+          // Start: big folder in the center of container
+          gsap.set(folderIcon, {
+            position: "absolute",
+            left: centerX - 60,
+            top: centerY - 60,
+            scale: 1.8,
+            transformOrigin: "center center",
+            opacity: 1,
+            willChange: "transform, opacity",
+          });
+
+          const getRandomRotation = () => Math.random() * 50 - 25;
+
+          // Predefined scattered positions for 5 items
+          const positions = [
+            {
+              x: centerX - baseDistance,
+              y: centerImageY - verticalSpread * 0.6,
+              rotation: getRandomRotation(),
+            },
+            {
+              x: centerX - baseDistance,
+              y: centerImageY + verticalSpread * 0.6,
+              rotation: getRandomRotation(),
+            },
+            { x: centerX, y: centerImageY, rotation: getRandomRotation() },
+            {
+              x: centerX + baseDistance,
+              y: centerImageY - verticalSpread * 0.6,
+              rotation: getRandomRotation(),
+            },
+            {
+              x: centerX + baseDistance,
+              y: centerImageY + verticalSpread * 0.6,
+              rotation: getRandomRotation(),
+            },
+          ];
+
+          // Origin of burst = folder position
+          const burstCenterX = centerX;
+          const burstCenterY = folderY;
+
+          // Master timeline: folder first, then items
+          const tl = gsap.timeline();
+
+          // 1️⃣ Folder moves + scales down to bottom center
+          tl.to(folderIcon, {
+            left: folderFinalLeft,
+            top: folderFinalTop,
+            scale: 1,
+            duration: 1.1,
+            ease: "power3.inOut",
+          });
+
+          // 2️⃣ Images: set initial "inside folder" state, then animate them out
+          archiveItems.forEach((item, index) => {
+            const pos = positions[index] || positions[positions.length - 1];
+
+            const deltaX = pos.x - burstCenterX;
+            const deltaY = pos.y - burstCenterY;
+            const angleFromFolder =
+              Math.atan2(deltaY, deltaX) * (180 / Math.PI);
+
+            // Base layout position (where the card will end up)
+            gsap.set(item, {
+              position: "absolute",
+              left: pos.x - itemHalfSize,
+              top: pos.y - itemHalfSize,
+              transformOrigin: "center center",
+              willChange: "transform, opacity",
+            });
+
+            // Initial transform: sitting on top of the folder, tiny + hidden
+            gsap.set(item, {
+              x: -deltaX,
+              y: -deltaY,
+              scale: 0,
+              opacity: 0,
+              rotation: angleFromFolder,
+            });
+
+            // Add this card's burst to the same timeline, after folder lands
+            tl.to(
+              item,
+              {
+                x: 0,
+                y: 0,
+                scale: 1,
+                opacity: 1,
+                rotation: pos.rotation,
+                duration: 0.8,
+                ease: "back.out(1.5)",
+              },
+              "-=0.5" + index * 0.08
+            ); // overlap slightly + stagger
+          });
+
+          // 3️⃣ Hover effects (transform-only, so cheap)
+          archiveItems.forEach((item) => {
+            item.addEventListener("mouseenter", () => {
+              gsap.to(item, {
+                scale: 1.06,
+                duration: 0.2,
+                ease: "power2.out",
+              });
+            });
+            item.addEventListener("mouseleave", () => {
+              gsap.to(item, {
+                scale: 1,
+                duration: 0.2,
+                ease: "power2.out",
+              });
+            });
+          });
+        }, 100);
+      }
+
+      window.addEventListener("load", initBurstAnimation);
+    </script>
+  </body>
+</html>
